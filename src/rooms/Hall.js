@@ -40,27 +40,49 @@ export function setup(ctx) {
   const foxrTex = assets['foxr_tex'];
   const newstickerTex = assets['newsticker_tex'];
   const mozillamrTex = assets['mozillamr_tex'];
-
+  const gridTex = assets['grid_tex'];
   const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
+  const gridMaterial = new THREE.MeshBasicMaterial({map: gridTex});
+  //const gridMaterial = new THREE.MeshBasicMaterial({map: gridTex});
+  const video1Texture = new THREE.VideoTexture(document.getElementById('video1'));
+  const video1Material = new THREE.MeshBasicMaterial(video1Texture);
 
   objectMaterials = {
-    'hall': hallMaterial,
-    'screen': new THREE.MeshBasicMaterial({map: newstickerTex}),
-    'xylophone': hallMaterial,
-    'xylostick-left': hallMaterial,
-    'xylostick-right': hallMaterial,
-    'xylostickball-left': hallMaterial.clone(),
-    'xylostickball-right': hallMaterial.clone(),
-    'lightpanels': new THREE.MeshBasicMaterial(),
+    'hall': gridMaterial,
+    'screen': gridMaterial,
+    'xylophone': gridMaterial,
+    'xylostick-left': gridMaterial,
+    'xylostick-right': gridMaterial,
+    'xylostickball-left':gridMaterial.clone(),
+    'xylostickball-right': gridMaterial.clone(),
+    'lightpanels': gridMaterial,
     'doorA': createDoorMaterial(ctx),
     'doorB': createDoorMaterial(ctx),
     'doorC': createDoorMaterial(ctx),
     'doorD': createDoorMaterial(ctx),
-    'sky': new THREE.MeshBasicMaterial({map: skyTex}),
-    'clouds': new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
-    'foxr': new THREE.MeshBasicMaterial({map: foxrTex, transparent: true}),
-    'mozillamr': new THREE.MeshBasicMaterial({map: mozillamrTex, transparent: true}),
+    'sky': gridMaterial.clone(),//new THREE.MeshBasicMaterial({map: skyTex}),
+    'clouds': gridMaterial.clone(),//new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
+    'foxr': gridMaterial.clone(),//new THREE.MeshBasicMaterial({map: foxrTex, transparent: true}),
+    'mozillamr': gridMaterial.clone(),//new THREE.MeshBasicMaterial({map: mozillamrTex, transparent: true}),
   };
+  // objectMaterials = {
+  //   'hall': hallMaterial,
+  //   'screen': new THREE.MeshBasicMaterial({map: newstickerTex}),
+  //   'xylophone': hallMaterial,
+  //   'xylostick-left': hallMaterial,
+  //   'xylostick-right': hallMaterial,
+  //   'xylostickball-left': hallMaterial.clone(),
+  //   'xylostickball-right': hallMaterial.clone(),
+  //   'lightpanels': new THREE.MeshBasicMaterial(),
+  //   'doorA': createDoorMaterial(ctx),
+  //   'doorB': createDoorMaterial(ctx),
+  //   'doorC': createDoorMaterial(ctx),
+  //   'doorD': createDoorMaterial(ctx),
+  //   'sky': hallMaterial.clone(),//new THREE.MeshBasicMaterial({map: skyTex}),
+  //   'clouds': hallMaterial.clone(),//new THREE.MeshBasicMaterial({map: cloudsTex, transparent: true}),
+  //   'foxr': hallMaterial.clone(),//new THREE.MeshBasicMaterial({map: foxrTex, transparent: true}),
+  //   'mozillamr': hallMaterial.clone(),//new THREE.MeshBasicMaterial({map: mozillamrTex, transparent: true}),
+  // };
 
   hall = assets['hall_model'].scene;
   hall.traverse(o => {
@@ -78,12 +100,12 @@ export function setup(ctx) {
     }
   });
 
-  paintings.setup(ctx, hall);
-  xylophone.setup(ctx, hall);
-  graffiti.setup(ctx, hall);
-  newsticker.setup(ctx, hall);
-  panoballs.setup(ctx, hall);
-  infopanels.setup(ctx, hall);
+  //paintings.setup(ctx, hall);
+  // xylophone.setup(ctx, hall);
+  // graffiti.setup(ctx, hall);
+  // newsticker.setup(ctx, hall);
+   panoballs.setup(ctx, hall);
+  // infopanels.setup(ctx, hall);
 
   ctx.raycontrol.addState('teleport', {
     colliderMesh: teleportFloor,
@@ -138,12 +160,12 @@ export function enter(ctx) {
   ctx.renderer.setClearColor( 0xC0DFFB );
   ctx.scene.add(scene);
 
-  xylophone.enter(ctx);
-  graffiti.enter(ctx);
-  infopanels.enter(ctx);
+ // xylophone.enter(ctx);
+ // graffiti.enter(ctx);
+ // infopanels.enter(ctx);
   ctx.raycontrol.activateState('doors');
   ctx.raycontrol.activateState('teleport');
-  paintings.enter(ctx);
+  //paintings.enter(ctx);
   panoballs.enter(ctx);
 }
 
@@ -154,16 +176,16 @@ export function exit(ctx) {
   ctx.raycontrol.deactivateState('doors');
   ctx.raycontrol.deactivateState('teleport');
 
-  xylophone.exit(ctx);
+  //xylophone.exit(ctx);
 }
 
 export function execute(ctx, delta, time) {
   panoballs.execute(ctx, delta, time);
-  paintings.execute(ctx, delta, time);
-  xylophone.execute(ctx, delta, time, controllers);
-  graffiti.execute(ctx, delta, time);
-  newsticker.execute(ctx, delta, time);
-  infopanels.execute(ctx, delta, time);
+ // paintings.execute(ctx, delta, time);
+ // xylophone.execute(ctx, delta, time, controllers);
+  //graffiti.execute(ctx, delta, time);
+  //newsticker.execute(ctx, delta, time);
+  //infopanels.execute(ctx, delta, time);
   updateUniforms(time);
   //checkCameraBoundaries(ctx);
 

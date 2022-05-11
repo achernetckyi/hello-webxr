@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 export default {
+
   // hall
   foxr_tex: { url: 'foxr.png', options: { encoding: THREE.sRGBEncoding, flipY: false} },
   hall_model: { url: 'hall.glb' },

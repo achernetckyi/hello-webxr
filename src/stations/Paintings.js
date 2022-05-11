@@ -2,7 +2,8 @@ import * as THREE from 'three';
 
 var paintings;
 var zoom = {object: null, widget: null, controller: null, animation: 0, icon: null};
-const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
+const PAINTINGS = [];
+//const PAINTINGS = ['seurat', 'sorolla', 'bosch', 'degas', 'rembrandt'];
 const RATIOS = [1, 1, 0.5, 0.5, 1];
 const ZOOMS = [0.4, 0.2, 0.2, 0.4, 0.25];
 
