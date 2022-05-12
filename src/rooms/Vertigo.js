@@ -16,12 +16,15 @@ function createDoorMaterial(ctx) {
 export function setup(ctx) {
   const assets = ctx.assets;
   var texture = assets['checkboard_tex'];
+  const video1Texture = new THREE.VideoTexture(document.getElementById('video1'));
+  const video1Material = new THREE.MeshBasicMaterial(video1Texture);
 
   var lightmap = assets['vertigo_lm_tex'];
   const material = new THREE.MeshBasicMaterial({color: 0xffffff, map: texture, lightMap: lightmap} );
 
   scene = assets['vertigo_model'].scene;
-  scene.getObjectByName('city').material = material;
+  //scene.getObjectByName('city').material = material;
+  scene.getObjectByName('city').material = video1Material;
   scene.getObjectByName('teleport').visible = false;
 
   scene.getObjectByName('door_frame').material =

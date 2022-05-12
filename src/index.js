@@ -127,7 +127,7 @@ function gotoRoom(room) {
 
   context.room = room;
 
-  playMusic(room);
+ // playMusic(room);
 
   rooms[context.room].enter(context);
 }
