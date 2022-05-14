@@ -15,11 +15,7 @@ const soundNames = [
   'trumpet',
 ];
 
-var sounds = {};
-soundNames.forEach( i => { sounds[i] = {animations: [], mesh: null, player: null, shadow: null} })
-
-const MAX_REPETITIONS = 3;
-var repetitions = MAX_REPETITIONS - 1;
+let videoSound;
 
 function createDoorMaterial(ctx) {
   return new THREE.ShaderMaterial({
@@ -48,59 +44,7 @@ export function setup(ctx) {
   door.position.set(0.4, 0.6, 1);
   door.rotation.set(0, 0.4, 0);
 
-  listener = new THREE.AudioListener();
-
-  mixer = new THREE.AnimationMixer(scene);
-
-  for (let id in sounds) {
-    const mesh = scene.getObjectByName(id);
-    if (!mesh) { continue; } 
-
-    const sound = new THREE.PositionalAudio(listener);
-    const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('assets/ogg/' + id + '.ogg', buffer => {
-      sound.setBuffer(buffer);
-      //sound.setRefDistance(20);
-    });
-
-    sounds[id].player = sound;
-    sounds[id].mesh = mesh;
-    mesh.visible = false;
-    mesh.add(sound);
-
-    const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, id);
-    if (clip) {
-      const action = mixer.clipAction(clip, mesh);
-      action.loop = THREE.LoopOnce;
-      sounds[id].animations.push(action);
-    }
-
-    for (let j = 0; j < mesh.children.length; j++) {
-      const obj = mesh.children[j];
-      const clip = THREE.AnimationClip.findByName(assets['sound_model'].animations, `${id}_${obj.name}`);
-      if (!clip) { continue; }
-      const action = mixer.clipAction(clip, mesh);
-      action.loop = THREE.LoopOnce;
-      sounds[id].animations.push(action);
-    }
-
-    let shadow = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry(3, 3),
-      new THREE.MeshBasicMaterial({
-        color: mesh.children[0].material.color,
-        map: assets['sound_shadow_tex'],
-        transparent: true,
-        opacity: 0,
-        depthTest: false,
-        blending: THREE.AdditiveBlending
-      })
-    );
-    shadow.position.set(mesh.position.x, 0.001, mesh.position.z);
-    shadow.rotation.x = -Math.PI / 2;
-    scene.add(shadow);
-    sounds[id].shadow = shadow;
-  }
-
+  addVideoSound();
   ctx.raycontrol.addState('sound', {
     colliderMesh: door.getObjectByName('door'),
     onHover: (intersection, active) => {
@@ -119,89 +63,42 @@ export function setup(ctx) {
       //teleport.onSelectEnd(intersection.point);
     }
   });
-
-  const floorTexture = assets['grid_tex'];
-  const floor = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(20, 20),
-    new THREE.MeshBasicMaterial({map: floorTexture})
-  );
-  scene.add(floor);
-  floor.rotation.x = -Math.PI / 2;
-
-  ctx.raycontrol.addState('teleportSound', {
-    colliderMesh: floor,
-    onHover: (intersection, active) => {
-      ctx.teleport.onHover(intersection.point, active);
-    },
-    onHoverLeave: () => {
-      ctx.teleport.onHoverLeave();
-    },
-    onSelectStart: (intersection, e) => {
-      ctx.teleport.onSelectStart(e);
-    },
-    onSelectEnd: (intersection) => {
-      ctx.teleport.onSelectEnd(intersection.point);
-    }
-  });
 }
 
-var currentSound = -1;
-
-function playSound() {
-  let sound;
-  if (currentSound >= 0) {
-    sound = sounds[soundNames[currentSound]];
-    sound.player.stop();
-    if (sound.animations.length) {
-      sound.mesh.visible = false;
-      sound.animations.forEach( i => {i.stop()});
-    }
-  }
-  repetitions ++;
-  if (repetitions == MAX_REPETITIONS) {
-    repetitions = 0;
-    // get next sound
-    do {
-      currentSound = (currentSound + 1) % soundNames.length;
-      sound = sounds[soundNames[currentSound]];
-    } while(!sound.mesh);
-  }
-
-  sound.player.play();
-  if (sound.animations.length) {
-    sound.mesh.visible = true;
-    sound.animations.forEach( i => {i.play()});
-  }
-  sound.shadow.material.opacity = 1;
-  timeout = setTimeout(playSound, 2000);
+function addVideoSound(){
+  const geometry = new THREE.SphereGeometry( 500, 60, 40);
+  geometry.scale( - 1, 1, 1 );
+  videoSound = document.getElementById("video1");
+  const texture = new THREE.VideoTexture(videoSound);
+  const material = new THREE.MeshBasicMaterial({map: texture });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.z = 50;
+  mesh.position.x = 3;
+  scene.add(mesh);
 }
 
 export function enter(ctx) {
+  console.log('enter sound');
+  videoSound.play();
   ctx.renderer.setClearColor(0x000000);
   ctx.scene.add(scene);
   ctx.scene.add(door);
-  ctx.camera.add(listener);
+//  ctx.camera.add(listener);
 
-  timeout = setTimeout(playSound, 2000);
   ctx.raycontrol.activateState('teleportSound');
   ctx.raycontrol.activateState('sound');
 }
 
 export function exit(ctx) {
+  videoSound.pause();
   ctx.scene.remove(scene);
   ctx.scene.remove(door);
-  ctx.camera.remove(listener);
+//  ctx.camera.remove(listener);
   ctx.raycontrol.deactivateState('teleportSound');
   ctx.raycontrol.deactivateState('sound');
-  clearTimeout(timeout);
 }
 
 export function execute(ctx, delta, time) {
-  mixer.update(delta);
-  const sound = sounds[soundNames[currentSound]];
-  if (sound && sound.shadow.material.opacity > 0) {
-    sound.shadow.material.opacity -= delta * 0.5;
-  }
   doorMaterial.uniforms.time.value = time;
 
   if (door.scale.z > 0.5) {

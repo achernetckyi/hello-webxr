@@ -44,8 +44,6 @@ export function setup(ctx) {
   const hallMaterial = new THREE.MeshBasicMaterial({map: hallLightmapTex});
   const gridMaterial = new THREE.MeshBasicMaterial({map: gridTex});
   //const gridMaterial = new THREE.MeshBasicMaterial({map: gridTex});
-  const video1Texture = new THREE.VideoTexture(document.getElementById('video1'));
-  const video1Material = new THREE.MeshBasicMaterial(video1Texture);
 
   objectMaterials = {
     'hall': gridMaterial,
@@ -107,6 +105,8 @@ export function setup(ctx) {
    panoballs.setup(ctx, hall);
   // infopanels.setup(ctx, hall);
 
+ // addVideoHall(hall);
+
   ctx.raycontrol.addState('teleport', {
     colliderMesh: teleportFloor,
     onHover: (intersection, active) => {
@@ -154,6 +154,47 @@ export function setup(ctx) {
   scene.add(hall);
   ctx.camera.add(fader);
 }
+
+// var videoPlaying = false;
+//
+// function addVideoHall(hall){
+//   const geometry = new THREE.BoxGeometry( 300, 300, 300 );
+//   geometry.scale( - 1, 1, 1 );
+// //  const geometry = hall.getObjectByName('doorA');
+//   const htmlEl = document.getElementById("video1");
+//   htmlEl.addEventListener('click', ()=> {
+//     videoStartStop();
+//   })
+//   setTimeout(() => {htmlEl.play()}, 3000);
+//   const texture = new THREE.VideoTexture(htmlEl);
+//   const material = new THREE.MeshLambertMaterial({map: texture });
+//   const mesh = new THREE.Mesh(geometry, material);
+//   mesh.position.z = 3;
+//   mesh.position.x = 3;
+//   //hall.getObjectByName('doorA').map = texture;
+//   hall.add(mesh);
+//    //scene.add(mesh);
+// }
+//
+//
+// function videoStartStop(){
+//   if (videoPlaying) {
+//     videoStop();
+//   } else {
+//     videoStart();
+//   }
+// }
+//
+// function videoStart(){
+//   video1.play();
+//   videoPlaying = true;
+// }
+//
+// function videoStop(){
+//   video1.pause();
+//   video1.currentTime = 0;
+//   videoPlaying = false;
+// }
 
 export function enter(ctx) {
   ctx.systemsGroup['roomHall'].play();
