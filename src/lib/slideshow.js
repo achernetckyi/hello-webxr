@@ -13,106 +13,106 @@ slideshow.paths = [
       velocity: new THREE.Vector3(0, 0, -0.1),
       angularVelocity: new THREE.Vector3(0.04, 0, 0)
     },
-    // {
-    //   from: new THREE.Vector3(4.5, 1.6, -3),
-    //   lookAt: new THREE.Vector3(100, 0, 0),
-    //   velocity: new THREE.Vector3(0, 0, -0.15),
-    //   angularVelocity: new THREE.Vector3(0, 0, 0)
-    // },
-    // {
-    //   from: new THREE.Vector3(0, 1.6, 0),
-    //   lookAt: new THREE.Vector3(50, 0, -40),
-    //   velocity: new THREE.Vector3(0, 0.12, 0),
-    //   angularVelocity: new THREE.Vector3(0, 0.1, 0)
-    // },
-    // {
-    //   from: new THREE.Vector3(3, 2.4, -4),
-    //   lookAt: new THREE.Vector3(-50, 0, 40),
-    //   velocity: new THREE.Vector3(0, -0.12, 0),
-    //   angularVelocity: new THREE.Vector3(0, -0.1, 0)
-    // }
+    {
+      from: new THREE.Vector3(4.5, 1.6, -3),
+      lookAt: new THREE.Vector3(100, 0, 0),
+      velocity: new THREE.Vector3(0, 0, -0.15),
+      angularVelocity: new THREE.Vector3(0, 0, 0)
+    },
+    {
+      from: new THREE.Vector3(0, 1.6, 0),
+      lookAt: new THREE.Vector3(50, 0, -40),
+      velocity: new THREE.Vector3(0, 0.12, 0),
+      angularVelocity: new THREE.Vector3(0, 0.1, 0)
+    },
+    {
+      from: new THREE.Vector3(3, 2.4, -4),
+      lookAt: new THREE.Vector3(-50, 0, 40),
+      velocity: new THREE.Vector3(0, -0.12, 0),
+      angularVelocity: new THREE.Vector3(0, -0.1, 0)
+    }
+  ],
+  //'vertigo'
+  [
+    {
+      from: new THREE.Vector3(0, 1.6, 0),
+      lookAt: new THREE.Vector3(0, 0, -10),
+      velocity: new THREE.Vector3(0, 0, 0),
+      angularVelocity: new THREE.Vector3(-0.01, 0.07, 0)
+    },
+    {
+      from: new THREE.Vector3(0, 1.6, -0.4),
+      lookAt: new THREE.Vector3(0, 0, 6),
+      velocity: new THREE.Vector3(0, 0, 0.1),
+      angularVelocity: new THREE.Vector3(0.07, 0, 0)
+    }
   ],
   //'sound'
-  // [
-  //   {
-  //     from: new THREE.Vector3(0, 1.6, 0),
-  //     lookAt: new THREE.Vector3(0, 0, -100),
-  //     velocity: new THREE.Vector3(0.1, 0, 0.1),
-  //     angularVelocity: new THREE.Vector3(0, 0.01, 0)
-  //   },
-  // ],
-  // //'photogrammetry'
-  // [
-  //   {
-  //     from: new THREE.Vector3(0, 1.2, 0.8),
-  //     lookAt: new THREE.Vector3(-100, 0.5, 0),
-  //     velocity: new THREE.Vector3(0, 0, -0.2),
-  //     angularVelocity: new THREE.Vector3(0, 0, 0)
-  //   },
-  //   {
-  //     from: new THREE.Vector3(-1, 1, -1.6),
-  //     lookAt: new THREE.Vector3(-40, 0, 100),
-  //     velocity: new THREE.Vector3(-0.05, 0, 0),
-  //     angularVelocity: new THREE.Vector3(0, 0, 0)
-  //   }
-  // ],
-  // //'vertigo'
-  // [
-  //   {
-  //     from: new THREE.Vector3(0, 1.6, 0),
-  //     lookAt: new THREE.Vector3(0, 0, -10),
-  //     velocity: new THREE.Vector3(0, 0, 0),
-  //     angularVelocity: new THREE.Vector3(-0.01, 0.07, 0)
-  //   },
-  //   {
-  //     from: new THREE.Vector3(0, 1.6, -0.4),
-  //     lookAt: new THREE.Vector3(0, 0, 6),
-  //     velocity: new THREE.Vector3(0, 0, 0.1),
-  //     angularVelocity: new THREE.Vector3(0.07, 0, 0)
-  //   }
-  // ],
-  // //'panoramastereo'
-  // [
-  //   {
-  //     from: new THREE.Vector3(0, 0, 0),
-  //     lookAt: new THREE.Vector3(-100, 0, 0),
-  //     velocity: new THREE.Vector3(0, 0, 0),
-  //     angularVelocity: new THREE.Vector3(0.03, 0.05, 0)
-  //   }
-  // ],
-  // //'panorama1'
-  // [
-  // ],
-  // //'panorama2'
-  // [
-  //     {
-  //     from: new THREE.Vector3(0, 0, 0),
-  //     lookAt: new THREE.Vector3(-100, 0, 0),
-  //     velocity: new THREE.Vector3(0, 0, 0),
-  //     angularVelocity: new THREE.Vector3(0.01, 0.1, 0)
-  //   }
-  // ],
-  // //'panorama3'
-  // [
-  // ],
-  // //'panorama4'
-  // [
-  //   {
-  //     from: new THREE.Vector3(0, 0, 0),
-  //     lookAt: new THREE.Vector3(-100, 0, 0),
-  //     velocity: new THREE.Vector3(0, 0, 0),
-  //     angularVelocity: new THREE.Vector3(-0.07, -0.05, 0)
-  //   }
-  // ],
-  // //'panorama5'
-  // [
-  //   {
-  //     from: new THREE.Vector3(0, 0, 0),
-  //     lookAt: new THREE.Vector3(100, 0, 80),
-  //     velocity: new THREE.Vector3(0, 0, 0),
-  //     angularVelocity: new THREE.Vector3(0, -0.02, 0)
-  //   }
-  // ]
+  [
+    {
+      from: new THREE.Vector3(0, 1.6, 0),
+      lookAt: new THREE.Vector3(0, 0, -100),
+      velocity: new THREE.Vector3(0.1, 0, 0.1),
+      angularVelocity: new THREE.Vector3(0, 0.01, 0)
+    }
+  ],
+  //'photogrammetry'
+  [
+    {
+      from: new THREE.Vector3(0, 1.2, 0.8),
+      lookAt: new THREE.Vector3(-100, 0.5, 0),
+      velocity: new THREE.Vector3(0, 0, -0.2),
+      angularVelocity: new THREE.Vector3(0, 0, 0)
+    },
+    {
+      from: new THREE.Vector3(-1, 1, -1.6),
+      lookAt: new THREE.Vector3(-40, 0, 100),
+      velocity: new THREE.Vector3(-0.05, 0, 0),
+      angularVelocity: new THREE.Vector3(0, 0, 0)
+    }
+  ],
+  //'panoramastereo'
+  [
+    {
+      from: new THREE.Vector3(0, 0, 0),
+      lookAt: new THREE.Vector3(-100, 0, 0),
+      velocity: new THREE.Vector3(0, 0, 0),
+      angularVelocity: new THREE.Vector3(0.03, 0.05, 0)
+    }
+  ],
+  //'panorama1'
+  [
+  ],
+  //'panorama2'
+  [
+      {
+      from: new THREE.Vector3(0, 0, 0),
+      lookAt: new THREE.Vector3(-100, 0, 0),
+      velocity: new THREE.Vector3(0, 0, 0),
+      angularVelocity: new THREE.Vector3(0.01, 0.1, 0)
+    }
+  ],
+  //'panorama3'
+  [
+  ],
+  //'panorama4'
+  [
+    {
+      from: new THREE.Vector3(0, 0, 0),
+      lookAt: new THREE.Vector3(-100, 0, 0),
+      velocity: new THREE.Vector3(0, 0, 0),
+      angularVelocity: new THREE.Vector3(-0.07, -0.05, 0)
+    }
+  ],
+  //'panorama5'
+  [
+    {
+      from: new THREE.Vector3(0, 0, 0),
+      lookAt: new THREE.Vector3(100, 0, 80),
+      velocity: new THREE.Vector3(0, 0, 0),
+      angularVelocity: new THREE.Vector3(0, -0.02, 0)
+    }
+  ]
 ];
 
 slideshow.setup = function (context) {

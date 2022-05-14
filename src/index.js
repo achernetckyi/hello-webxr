@@ -45,9 +45,9 @@ var listener, ambientMusic;
 
 var rooms = [
   roomHall,
+  roomVertigo,
   roomSound,
   roomPhotogrammetryObject,
-  roomVertigo,
   roomPanoramaStereo,
   roomPanorama,
   roomPanorama,
